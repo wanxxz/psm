@@ -7,7 +7,7 @@ function SheetComponent(props: { module: { default: Function } }) {
   let ref: HTMLDivElement | undefined
 
   createEffect(() => {
-    const el = props.module.default({ data })
+    const el = props.module.default({ data: data() })
     ref?.appendChild(el)
   })
 

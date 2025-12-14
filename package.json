@@ -4,11 +4,13 @@
   "scripts": {
     "prepare": "husky",
     "prestart": "vite build",
-    "start": "vite preview"
+    "start": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "@ark-ui/solid": "5.30.0",
     "@emotion/css": "11.13.5",
+    "@jsonforms/core": "3.7.0",
     "@tanstack/solid-db": "0.1.54",
     "@tanstack/solid-form": "1.27.2",
     "@tanstack/solid-pacer": "0.16.1",
@@ -29,14 +31,20 @@
     "zod": "4.1.13"
   },
   "devDependencies": {
+    "@storybook/addon-vitest": "10.1.8",
     "@tanstack/router-plugin": "1.140.5",
     "@types/lodash": "4.17.21",
     "@types/node": "24.10.2",
+    "@vitest/browser-playwright": "4.0.15",
     "husky": "9.1.7",
     "lint-staged": "16.2.7",
+    "playwright": "1.57.0",
     "prettier": "3.7.4",
+    "storybook": "10.1.8",
+    "storybook-solidjs-vite": "10.0.9",
     "typescript": "5.9.3",
     "vite": "7.2.7",
-    "vite-plugin-solid": "2.11.10"
+    "vite-plugin-solid": "2.11.10",
+    "vitest": "4.0.15"
   }
 }

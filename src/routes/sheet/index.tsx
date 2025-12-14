@@ -1,32 +1,18 @@
 import { css } from '@emotion/css'
 import { createFileRoute } from '@tanstack/solid-router'
-import { createEffect, createResource, createSignal, Show, Suspense } from 'solid-js'
+import { createUniqueId, onMount } from 'solid-js'
+import { Tabulator } from 'tabulator-tables'
 
-function SheetComponent(props: { module: { default: Function } }) {
-  const [data] = createSignal([])
-  let ref: HTMLDivElement | undefined
+function SheetComponent() {
+  const id = createUniqueId()
 
-  createEffect(() => {
-    const el = props.module.default({ data: data() })
-    ref?.appendChild(el)
+  onMount(() => {
+    new Tabulator(id)
   })
 
-  return <div class={css({ position: 'absolute', width: '100%', height: '100%' })} ref={ref}></div>
-}
-
-function SheetComponentSuepense() {
-  const [module] = createResource(async () => {
-    const module = await import('canvas-datagrid')
-    return module
-  })
-
-  return (
-    <Suspense>
-      <Show when={module()}>{m => <SheetComponent module={m()} />}</Show>
-    </Suspense>
-  )
+  return <div id={id} class={css({ position: 'absolute', width: '100%', height: '100%' })}></div>
 }
 
 export const Route = createFileRoute('/_layout/sheet')({
-  component: SheetComponentSuepense
+  component: SheetComponent
 })

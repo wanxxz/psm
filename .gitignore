@@ -7,6 +7,7 @@
 !public
 !src
 
+!.devcontainer
 !.editorconfig
 !.env.template
 !.lintstagedrc.json

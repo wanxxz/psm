@@ -1,4 +1,4 @@
-const supportedLanguages = ['en', 'zh']
+const supportedLanguages = ['en']
 const defaultLangauge = supportedLanguages[0]
 
 export async function resolveLocale() {

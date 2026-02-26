@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/solid-query'
 import { resolveLocale, resolveMessages, resolveTimeZone } from '../locale'
-import { type JSX, type Component } from 'solid-js'
+import { type JSX, type Component, children } from 'solid-js'
 
 export const WithIntl: Component<{ children: JSX.Element }> = props => {
+  const c = children(() => props.children)
+
   const { isPending, error, data } = useQuery(() => ({
     queryKey: ['locale'],
     queryFn: async () => {
@@ -17,5 +19,5 @@ export const WithIntl: Component<{ children: JSX.Element }> = props => {
 
   if (error) return null
 
-  return <>{props.children}</>
+  return <>{c()}</>
 }

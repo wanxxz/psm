@@ -2,7 +2,6 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -17,8 +16,9 @@
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
-    "target": "esnext"
+    "target": "esnext",
+    "types": ["vite/client", "vitest/config"]
   },
-  "files": ["vite.config.ts"],
-  "include": ["src"]
+  "files": ["./vite.config.ts"],
+  "include": ["./src"]
 }

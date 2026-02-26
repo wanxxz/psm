@@ -1,21 +1,9 @@
 import { injectGlobal } from '@emotion/css'
-import { QueryClient, QueryClientProvider } from '@tanstack/solid-query'
-import { createRootRoute, Outlet, useRouter } from '@tanstack/solid-router'
+import { createRootRoute, Outlet } from '@tanstack/solid-router'
 import { onMount } from 'solid-js'
-import { getMessages, resolveLocale } from '../locale'
-
-async function initLocale() {
-  const locale = await resolveLocale()
-  const messages = await getMessages(locale)
-  const timeZone = 'UTC'
-
-  return { locale, messages, timeZone }
-}
+import { WithIntl, WithQuery } from '../components'
 
 function Root() {
-  const { locale, messages, timeZone } = Route.useLoaderData()
-  const router = useRouter()
-
   onMount(() => {
     injectGlobal({
       body: {
@@ -26,35 +14,14 @@ function Root() {
   })
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Outlet />
-    </QueryClientProvider>
+    <WithQuery>
+      <WithIntl>
+        <Outlet />
+      </WithIntl>
+    </WithQuery>
   )
 }
 
-function head() {
-  return {
-    meta: [
-      {
-        charSet: 'utf-8'
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
-      },
-      {
-        title: ''
-      }
-    ]
-  }
-}
-
-async function loader() {
-  return await initLocale()
-}
-
 export const Route = createRootRoute({
-  head: head,
-  loader: loader,
   component: Root
 })

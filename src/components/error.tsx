@@ -1,9 +1,26 @@
-import { ErrorComponent, type ErrorComponentProps } from '@tanstack/solid-router'
+import { ErrorComponent, rootRouteId, useMatch, useRouter, type ErrorComponentProps } from '@tanstack/react-router'
+import { type FunctionComponent } from 'react'
+import { Button } from 'react-aria-components'
+import { ButtonLink } from './link'
 
-function CustomErrorComponent(props: ErrorComponentProps) {
+const CustomErrorComponent: FunctionComponent<ErrorComponentProps> = props => {
+  const router = useRouter()
+  const isRoot = useMatch({
+    strict: false,
+    select: state => state.id === rootRouteId
+  })
+
   console.error(props.error)
 
-  return <ErrorComponent error={props.error} />
+  return (
+    <div>
+      <ErrorComponent error={props.error} />
+      <div>
+        <Button onPress={() => router.invalidate()}>Try Again</Button>
+        {isRoot ? <ButtonLink to="/">Home</ButtonLink> : <Button onPress={() => router.history.back()}>Go Back</Button>}
+      </div>
+    </div>
+  )
 }
 
 export { CustomErrorComponent as ErrorComponent }

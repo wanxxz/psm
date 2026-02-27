@@ -1,5 +1,3 @@
-export interface FormProps {}
-
-export function Form(props: FormProps) {
+export function Form() {
   return <div></div>
 }

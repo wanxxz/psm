@@ -1,11 +1,10 @@
-import { useQuery } from '@tanstack/solid-query'
+import { useQuery } from '@tanstack/react-query'
+import { type PropsWithChildren } from 'react'
+import { IntlProvider } from 'use-intl'
 import { resolveLocale, resolveMessages, resolveTimeZone } from '../locale'
-import { type JSX, type Component, children } from 'solid-js'
 
-export const WithIntl: Component<{ children: JSX.Element }> = props => {
-  const c = children(() => props.children)
-
-  const { isPending, error, data } = useQuery(() => ({
+export function WithIntl(props: PropsWithChildren) {
+  const { isPending, error, data } = useQuery({
     queryKey: ['locale'],
     queryFn: async () => {
       const locale = await resolveLocale()
@@ -13,11 +12,11 @@ export const WithIntl: Component<{ children: JSX.Element }> = props => {
       const timeZone = await resolveTimeZone()
       return { locale, messages, timeZone }
     }
-  }))
+  })
 
   if (isPending) return null
 
   if (error) return null
 
-  return <>{c()}</>
+  return <IntlProvider {...data}>{props.children}</IntlProvider>
 }

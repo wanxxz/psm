@@ -1,8 +1,8 @@
-import { QueryClientProvider } from '@tanstack/solid-query'
-import { children, type Component, type JSX } from 'solid-js'
-import { queryClient } from '../query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { type PropsWithChildren } from 'react'
 
-export const WithQuery: Component<{ children: JSX.Element }> = props => {
-  const c = children(() => props.children)
-  return <QueryClientProvider client={queryClient}>{c()}</QueryClientProvider>
+const queryClient = new QueryClient()
+
+export function WithQuery(props: PropsWithChildren) {
+  return <QueryClientProvider client={queryClient}>{props.children}</QueryClientProvider>
 }

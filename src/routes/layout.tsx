@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from '@tanstack/solid-router'
+import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 function Layout() {
   return <Outlet />

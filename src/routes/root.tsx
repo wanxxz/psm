@@ -1,27 +1,40 @@
-import { injectGlobal } from '@emotion/css'
-import { createRootRoute, Outlet } from '@tanstack/solid-router'
-import { onMount } from 'solid-js'
-import { WithIntl, WithQuery } from '../components'
+import { createRootRoute, HeadContent, Outlet, Scripts } from '@tanstack/react-router'
+import { WithIntl, WithQuery, WithRS } from '../components'
 
 function Root() {
-  onMount(() => {
-    injectGlobal({
-      body: {
-        fontFamily: 'sans-serif',
-        margin: 0
-      }
-    })
-  })
-
   return (
-    <WithQuery>
-      <WithIntl>
-        <Outlet />
-      </WithIntl>
-    </WithQuery>
+    <html>
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        <WithQuery>
+          <WithIntl>
+            <WithRS>
+              <Outlet />
+            </WithRS>
+          </WithIntl>
+        </WithQuery>
+        <Scripts />
+      </body>
+    </html>
   )
 }
 
 export const Route = createRootRoute({
+  head: () => ({
+    meta: [
+      {
+        charSet: 'utf-8'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+      {
+        title: ''
+      }
+    ]
+  }),
   component: Root
 })

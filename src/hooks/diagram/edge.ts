@@ -1,4 +1,4 @@
-import { createTransaction } from '@tanstack/solid-db'
+import { createTransaction } from '@tanstack/react-db'
 import { type Edge, edgeLocalCollection, edgeServerCollection } from '../../collections'
 
 export async function createEdge() {

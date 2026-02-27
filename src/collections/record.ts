@@ -1,5 +1,5 @@
 import { queryCollectionOptions } from '@tanstack/query-db-collection'
-import { createCollection, localStorageCollectionOptions } from '@tanstack/solid-db'
+import { createCollection, localStorageCollectionOptions } from '@tanstack/react-db'
 import z from 'zod'
 import { queryClient } from '../query'
 
